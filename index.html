@@ -979,6 +979,8 @@
 
         // 6. Modal Functions
         function openTaskModal(taskId = null) {
+            const dueDateInput = document.getElementById('task-due-date');
+            dueDateInput.min = getLocalISODate();
             document.getElementById('task-form').reset();
             if (taskId) {
                 const task = appState.tasks.find(t => t.id === taskId);
@@ -1012,6 +1014,10 @@
                 description: document.getElementById('task-desc').value.trim()
             };
             if (!task.title || !task.dueDate) return;
+            if (task.dueDate < today) {
+                showToast('วันกำหนดส่งต้องไม่ย้อนหลังไปก่อนวันนี้', 'error');
+                return;
+            }
 
             if (id) {
                 const idx = appState.tasks.findIndex(t => t.id === id);
