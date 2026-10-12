@@ -978,8 +978,9 @@
         }
 
         // 6. Modal Functions
-        function openTaskModal(taskId = null) {
-            const dueDateInput = document.getElementById('task-due-date');
+        function openTaskModal(taskId = null)
+        
+        { const dueDateInput = document.getElementById('task-due-date');
             dueDateInput.min = getLocalISODate();
             document.getElementById('task-form').reset();
             if (taskId) {
@@ -1014,6 +1015,8 @@
                 description: document.getElementById('task-desc').value.trim()
             };
             if (!task.title || !task.dueDate) return;
+            const today = getLocalISODate();
+
             if (task.dueDate < today) {
                 showToast('วันกำหนดส่งต้องไม่ย้อนหลังไปก่อนวันนี้', 'error');
                 return;
